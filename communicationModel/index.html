@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+  <head>
+    <META charset="utf-8">
+    
+    <style type = "text/css">
+
+    body {
+    width:75%;
+    font:normal 12px/1.6em Arial, Helvetica, sans-serif;
+    color:#2a3845;
+    margin:50px;
+    padding:30px;
+    background:#FFFFFF; 
+}
+#task {
+    margin-bottom:20px;
+    font:normal 18px Georgia, serif;
+    color:#fa7393;
+    border-bottom:1px solid #efece7;
+    width:500px;
+		
+}
+
+#message {
+   width:300px;
+   height:200px;
+   overflow:scroll-y;
+   padding:10px;
+   float:left;
+}
+
+textarea{
+	padding: 9px;
+	width:400px;
+	height:150px;
+	line-height: 150%;
+	
+}
+
+#submit{  
+    width: auto;  
+    padding: 9px 15px;  
+    background: #617798;  
+    border: 0;  
+    font-size: 14px;  
+    color: #FFFFFF;  
+    }
+
+
+p {
+    margin:20px;
+    padding:0;
+    color: #617798;
+}
+
+#wrapper {
+	
+	width:90%; 
+	padding:10px;
+}
+
+.footer {
+    padding:8px 8px;
+    margin-bottom:0;
+    margin-top:300px;
+    clear:both;
+    color:red;
+    text-align:center;
+}
+
+h2 {
+    color:#7a2e40;
+    margin:0 0 8px;
+    padding-bottom:5px;
+    font:bold 18px Georgia, serif;	
+}
+    </style>
+
+    <title>Communication Model</title>
+        <script type="text/javascript" src="socket.io/socket.io.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script>
+	
+	var socket=io.connect('http://lab.mywebclass.org:3003');
+	
+	
+	// When page loads
+	$(function(){
+		// when the client clicks SEND
+		$('#submit').click( function() {
+			var message = $('#msg').val();
+			$('#msg').val('');
+			// tell server to execute 'sendmsg' and send along one parameter
+			socket.emit('sendmsg', message);
+                        $('#conversation').append('<b>'+"Client Message: "+'</b>' + message + '<br>');
+		});
+        });
+	
+	
+	</script>
+ 
+       
+  </head>
+  <body>
+  
+  <div id="wrapper">
+   <h2> - Project 3 - </h2>
+   
+   <div id="task"> Communication model</div> 
+   
+   
+	<br />
+		
+	
+		 
+            <p>
+			Type in Your message below
+			 
+        <div id="message" >
+		<div id="conversation"></div>
+		<br />
+	    <textarea id="msg"> </textarea>
+		<br />
+		<input type="button" id="submit" value="send" />
+		</div>			
+                        
+				
+    
+	<br />
+	<div class="footer">
+		Copyright &copy; 2012 Fariath Mo. All rights reserved.<br/>
+		
+	</div>
+  </div>
+  </body>
+</html>
+
